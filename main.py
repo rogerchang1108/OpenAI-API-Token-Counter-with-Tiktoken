@@ -94,12 +94,22 @@ tab1, tab2 = st.tabs(["Tiktoken", "OpenAI"])
 with tab1:
     st.title("Count prompt(input) tokens by Tiktoken")
         
-    with st.form(key='my_form1'):
-        """prompt = st.text_area(
-            'Prompt for ChatGPT',
-            f"""""",
-            height = 190,
-        )"""
+    with st.form(key='messages_form'):
+        st.write("Messages:")
+        for i, msg in enumerate(example_messages):
+            role = st.selectbox(f"Role for Message {i+1}:", ["system", "user"], 
+                                index = 0 if msg["role"] == "system" else 1)
+            
+            if msg.get("name", "") != "" :
+                name = st.selectbox(f"Name for Message {i+1} (optional):", ["example_user", "example_assistant"], 
+                                index = 0 if msg["name"] == "example_user" else 1)
+                
+            content = st.text_area(f"Content for Message {i+1}:", value=msg["content"])
+            
+            if msg.get("name", "") != "" :
+                example_messages[i] = {"role": role, "name": name, "content": content}
+            else:
+                example_messages[i] = {"role": role, "content": content}
 
         model_selected = st.selectbox(
             'Model',
@@ -122,29 +132,32 @@ with tab1:
             label='Submit', 
         )
         
-    if submit_button1:
-        num_tokens_from_messages(example_messages, model_selected)
+        if submit_button1:
+            num_tokens_from_messages(example_messages, model_selected)
 
 with tab2:
     st.title("Verify the prompt(input) tokens and Check completion(output) tokens by OpenAI API")
-    
     if 'disabled' not in st.session_state:
         st.session_state.disabled = True
-    
-    openai_api_key = st.text_input('OpenAI API Key:')
 
-    if openai_api_key:
-        st.success('Unlocked!', icon = '🔓')
-        st.session_state.disabled = False
-    else:
-        st.info('Locked: Please Input Your OpenAI API Key First.', icon = '🔐')
-        st.session_state.disabled = True
+    openai_api_key = st.text_input('OpenAI API Key:')
     
     with st.form(key='my_form2'):
+        if openai_api_key:
+            st.success('Unlocked!', icon = '🔓')
+            st.session_state.disabled = False
+        else:
+            st.info('Locked: Please Input Your OpenAI API Key First.', icon = '🔐')
+            st.session_state.disabled = True
+    
+    
+        for msg in example_messages:
+            st.write(f"{msg['role']} ({msg.get('name', '')}): {msg['content']}")
+            
         submit_button2 = st.form_submit_button(
             label='Submit', 
             disabled=st.session_state.disabled
         )
             
-    if submit_button2:
-        call_openaiapi(openai_api_key, model_selected, example_messages)  
+        if submit_button2:
+            call_openaiapi(openai_api_key, model_selected, example_messages)  
