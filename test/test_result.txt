@@ -1,0 +1,103 @@
+gpt-4-0125-preview: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-4-0125-preview: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-4-turbo-preview: model chose by user.
+Warning: gpt-4-turbo-preview may update over time. Returning num tokens assuming gpt-4-0125-preview.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-4-0125-preview: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-4-1106-preview: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-4-1106-preview: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-4: model chose by user.
+Warning: gpt-4 may update over time. Returning num tokens assuming gpt-4-0613.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-4-0613: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-4-0613: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-4-0613: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo-0125: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-0125: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo: model chose by user.
+Warning: gpt-3.5-turbo may update over time. Returning num tokens assuming gpt-3.5-turbo-0125
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-0125: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo-1106: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-1106: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo-16k: model chose by user.
+Warning: gpt-3.5-turbo-16k may update over time. Returning num tokens assuming gpt-3.5-turbo-16k-0613
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-16k-0613: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo-0613: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-0613: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
+gpt-3.5-turbo-16k-0613: model chose by user.
+80 prompt tokens counted by num_tokens_from_messages().
+
+gpt-3.5-turbo-16k-0613: model return by the OpenAI API.
+80 prompt(input) tokens counted by the OpenAI API.
+1 completion(output) tokens counted by the OpenAI API.
+
+Let
+
