@@ -95,7 +95,7 @@ with tab1:
     st.title("Count prompt(input) tokens by Tiktoken")
         
     with st.form(key='messages_form'):
-        st.write("Messages:")
+        st.write("## Messages:")
         for i, msg in enumerate(example_messages):
             role = st.selectbox(f"Role for Message {i+1}:", ["system", "user"], 
                                 index = 0 if msg["role"] == "system" else 1)
