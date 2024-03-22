@@ -1,5 +1,6 @@
-# Miscellaneous
+.venv/
 .DS_Store
 .env
-.venv/
+
 test/
+__pycache__
