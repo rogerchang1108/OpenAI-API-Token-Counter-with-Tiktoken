@@ -5,7 +5,7 @@ import streamlit as st
 
 def reply_from_openai(col, openai_api_key, model_selected, prompt_messages):
     client = OpenAI(
-        api_key=os.environ.get('OPENAI_API_KEY', openai_api_key),
+        api_key=openai_api_key,
         # api_key=os.environ.get('OPENAI_API_KEY'),
     )
 
