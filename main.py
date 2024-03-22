@@ -71,21 +71,21 @@ def call_openaiapi(openai_api_key, model_selected, prompt_messages):
 example_messages = [
     {
         "role": "system",
-        "content": "You are a helpful, pattern-following assistant that translates corporate jargon into plain English.",
+        "content": "Identify words in the following passage that are too difficult for intermediate (CEFR: B2) students and replace these words with easier words (B2 or lower), so the results are more accessible for the intermediate students:",
     },
     {
         "role": "system",
         "name": "example_user",
-        "content": "New synergies will help drive top-line growth.",
+        "content": "The hottest day of the summer so far was drawing to a close and a drowsy silence lay over the large, square houses of Privet Drive.",
     },
     {
         "role": "system",
         "name": "example_assistant",
-        "content": "Things working well together will increase revenue.",
+        "content": "The hottest day of the summer so far was coming to an end and a sleepy silence cover the large, square houses of Privet Road.",
     },
     {
         "role": "user",
-        "content": "Let's circle back when we have more bandwidth to touch base on opportunities for increased leverage.",
+        "content": "April 9, 1940. It was a breakfast like any other until the dishes started to rattle. Then an all-alert siren pierced the morning calm and the sky above Odense, Denmark, thundered with sound. The Pedersen family pushed back their chairs, raced outside, and looked up. Suspended above them in close formation was a squadron of dark airplanes. They were flying ominously low, no more than three hundred meters above the ground. The black marks on each wing tagged them as German warplanes. Scraps of green paper fluttered down.",
     },
 ]
 
@@ -104,7 +104,7 @@ with tab1:
                 name = st.selectbox(f"Name for Message {i+1} (optional):", ["example_user", "example_assistant"], 
                                 index = 0 if msg["name"] == "example_user" else 1)
                 
-            content = st.text_area(f"Content for Message {i+1}:", value=msg["content"])
+            content = st.text_area(f"Content for Message {i+1}:", value=msg["content"], height=150)
             
             if msg.get("name", "") != "" :
                 example_messages[i] = {"role": role, "name": name, "content": content}
@@ -132,8 +132,8 @@ with tab1:
             label='Submit', 
         )
         
-        if submit_button1:
-            num_tokens_from_messages(example_messages, model_selected)
+    if submit_button1:
+        num_tokens_from_messages(example_messages, model_selected)
 
 with tab2:
     st.title("Verify the prompt(input) tokens and Check completion(output) tokens by OpenAI API")
@@ -152,12 +152,12 @@ with tab2:
     
     
         for msg in example_messages:
-            st.write(f"{msg['role']} ({msg.get('name', '')}): {msg['content']}")
+            st.write(f"{msg['role']} ({msg.get('name', '')}): \n\n{msg['content']}")
             
         submit_button2 = st.form_submit_button(
             label='Submit', 
             disabled=st.session_state.disabled
         )
             
-        if submit_button2:
-            call_openaiapi(openai_api_key, model_selected, example_messages)  
+    if submit_button2:
+        call_openaiapi(openai_api_key, model_selected, example_messages)  
