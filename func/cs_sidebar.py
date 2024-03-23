@@ -11,5 +11,16 @@ def img_to_bytes(img_path):
 
 
 def cs_sidebar():
-    st.sidebar.markdown('''[<img src='data:image/png;base64,{}' class='img-fluid' width=32 height=32>](https://streamlit.io/)'''.format(img_to_bytes('img/logomark_website.png')), unsafe_allow_html=True)
-    st.sidebar.header('Streamlit token counter')
+    st.sidebar.markdown('''
+        <div style="display: flex; flex-direction: row; align-items: center;">
+            <img src='data:image/png;base64,{}' class='img-fluid' width=50 height=50 style="margin-right: 10px;">
+            <img src='data:image/png;base64,{}' class='img-fluid' width=50 height=50 style="margin-right: 10px;">
+        </div>
+        '''.format(
+            img_to_bytes('img/logomark_website.png'),
+            img_to_bytes('img/openai_icon.png')
+        ), 
+        unsafe_allow_html=True
+    )
+    
+    st.sidebar.header('Streamlit Token Counter')
