@@ -77,8 +77,10 @@ def cs_body(example_messages):
         st.session_state.num_tokens = num_tokens_from_messages(col1, example_messages, model_selected)
     
     if st.session_state.num_tokens != 0:
-        col1.write(f'{model_selected}: model chose by user.') 
-        col1.write(f'{st.session_state.num_tokens} prompt(input) tokens counted by Tiktoken.')
+        col1.markdown(f'<p class="markdown-custom-1">{model_selected}: model chose by user.</p>', 
+                      unsafe_allow_html=True) 
+        col1.markdown(f'<p class="markdown-custom-1">{st.session_state.num_tokens} prompt(input) tokens counted by Tiktoken.</p>', 
+                      unsafe_allow_html=True)
 
     ## Column 2: OpenAI Part
     with col2.form(key='openai_form2'):
@@ -92,7 +94,8 @@ def cs_body(example_messages):
             st.session_state.disabled = True
     
         for msg in example_messages:
-            st.write(f'{msg['role']} ({msg.get('name', '')}): \n\n{msg['content']}')
+            st.markdown(f'<p class="markdown-custom-1">{msg['role']} ({msg.get('name', '')}): \n\n<p class="markdown-custom-2">{msg['content']}</p></p>', 
+                        unsafe_allow_html=True)
             
         submit_button2 = st.form_submit_button(
             label='Submit', 

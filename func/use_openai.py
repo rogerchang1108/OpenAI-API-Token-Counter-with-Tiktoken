@@ -17,10 +17,13 @@ def reply_from_openai(col, openai_api_key, model_selected, prompt_messages):
             temperature=0,
         )
         
-        col.write(f'{chat_completion.model}: model return by the OpenAI API.')
-        col.write(f'{chat_completion.usage.prompt_tokens} prompt(input) tokens counted by the OpenAI API.')
-        col.write(f'{chat_completion.usage.completion_tokens} completion(output) tokens counted by the OpenAI API.')
-        col.write(chat_completion.choices[0].message.content)
+        col.markdown(f'<p class="markdown-custom-1">{chat_completion.model}: model return by the OpenAI API.</p>', 
+                     unsafe_allow_html=True)
+        col.markdown(f'<p class="markdown-custom-1">{chat_completion.usage.prompt_tokens} prompt(input) tokens counted by the OpenAI API.</p>', 
+                     unsafe_allow_html=True)
+        col.markdown(f'<p class="markdown-custom-1">{chat_completion.usage.completion_tokens} completion(output) tokens counted by the OpenAI API.</p>', 
+                     unsafe_allow_html=True)
+        col.markdown(chat_completion.choices[0].message.content)
     
     except Exception as e:
         col.info('❗Something went wrong! Check your OpenAI API Key!!!')

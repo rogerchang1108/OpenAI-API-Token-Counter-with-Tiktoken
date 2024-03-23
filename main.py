@@ -12,20 +12,34 @@ st.set_page_config(
 )
 
 contents_font_css = """<style>
+    /* st.text_input label */
     div[class*="stTextInput"] label p {
-        font-size: 24px;
+        font-size: 28px;
     }
+    /* st.selectbox, TextArea label */
     div[class*="stSelectbox"] label p, div[class*="stTextArea"] label p {
         font-size: 22px;
     }
-  
+    
+     /* st.selectbox options */
+    div[data-baseweb="select"] div {
+        font-size: 20px !important; 
+    }
+    /* st.text_input, st.text_area value */
     input, textarea {
-        font-size: 20px !important;
+        font-size: 18px !important;
+    }
+    
+    /* st.markdown */
+    .markdown-custom-1 {
+        font-size:20px !important;
+    }
+    .markdown-custom-2 {
+        font-size:18px !important;
     }
 </style>"""
 
 st.markdown(contents_font_css, unsafe_allow_html=True)
-
 
 example_messages = [
     {
