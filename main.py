@@ -33,10 +33,10 @@ contents_font_css = """
         
         /* st.markdown */
         .markdown-custom-1 {
-            font-size:20px !important;
+            font-size:24px !important;
         }
         .markdown-custom-2 {
-            font-size:18px !important;
+            font-size:20px !important;
         }
     </style>
 """
