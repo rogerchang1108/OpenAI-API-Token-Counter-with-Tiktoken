@@ -24,10 +24,25 @@ def cs_body(example_messages):
     if 'disabled' not in st.session_state:
         st.session_state.disabled = True
 
-    openai_api_key = st.text_input(label = '🔑 OpenAI API Key: ', 
+    openai_api_key = st.text_input(label = 'OpenAI API Key 🔑:', 
                                    max_chars = 60,
                                    type = 'password',
                                    placeholder = 'Enter your OpenAI API Key here...')
+    
+    # OpenAI API Price Setting
+    colp1, colp2 = st.columns(2)
+    
+    input_price_per_M = colp1.number_input(label = 'Input Price ($ / 1M tokens)',
+                                        min_value = 0.01,
+                                        max_value = 1000.00,
+                                        value = 0.50,
+                                        step = 0.10,)
+    
+    output_price_per_M = colp2.number_input(label = 'Output Price ($ / 1M tokens)',
+                                        min_value = 0.01,
+                                        max_value = 1000.00,
+                                        value = 1.50,
+                                        step = 0.10,)
     
     # Body Part: 
     col1, col2 = st.columns(2)
@@ -72,34 +87,23 @@ def cs_body(example_messages):
                 ],
             )
             
-            colp1, colp2 = st.columns(2)
-            
-            input_price_per_M = colp1.number_input(label = 'Input Price ($ / 1M tokens)',
-                                             min_value = 0.01,
-                                             max_value = 1000.00,
-                                             value = 0.50,)
-            
-            output_price_per_M = colp2.number_input(label = 'Output Price ($ / 1M tokens)',
-                                             min_value = 0.01,
-                                             max_value = 1000.00,
-                                             value = 1.50,)
-            
             submit_button1 = st.form_submit_button(
                 label='Submit', 
             )
             
         if submit_button1:
             st.session_state.num_tokens = num_tokens_from_messages(st, example_messages, model_selected)
+            st.session_state.response = ''
         
         if st.session_state.num_tokens != 0:
             with st.container(border=True):
                 st.markdown(f'<p class="markdown-custom-1">{model_selected} model chose by user</p>', 
                             unsafe_allow_html=True) 
-                st.markdown(f'<p class="markdown-custom-1">{st.session_state.num_tokens} input tokens counted by Tiktoken</p>', 
-                            unsafe_allow_html=True)
                 
+                st.markdown(f'<p class="markdown-custom-1">📥 {st.session_state.num_tokens} input tokens counted by Tiktoken</p>', 
+                            unsafe_allow_html=True)
                 estimated_input_price = st.session_state.num_tokens * input_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">{estimated_input_price}$ Estimated Input Price</p>', 
+                st.markdown(f'<p class="markdown-custom-1">💳 {estimated_input_price}$ Estimated Input Price</p>', 
                         unsafe_allow_html=True)
 
     ## Column 2: OpenAI Part
@@ -134,14 +138,15 @@ def cs_body(example_messages):
             with st.container(border=True):           
                 st.markdown(f'<p class="markdown-custom-1">{st.session_state.response.model} model return by OpenAI API.</p>', 
                             unsafe_allow_html=True)
-                st.markdown(f'<p class="markdown-custom-1">{st.session_state.response.usage.prompt_tokens} input tokens counted by OpenAI API.</p>', 
+                
+                st.markdown(f'<p class="markdown-custom-1">📥 {st.session_state.response.usage.prompt_tokens} input tokens counted by OpenAI API.</p>', 
                             unsafe_allow_html=True)
-                st.markdown(f'<p class="markdown-custom-1">{st.session_state.response.usage.completion_tokens} output tokens counted by OpenAI API.</p>', 
+                input_price = st.session_state.response.usage.prompt_tokens * input_price_per_M / 1000000
+                st.markdown(f'<p class="markdown-custom-1">💸 {input_price}$ Input Price</p>', 
                             unsafe_allow_html=True)
                 
-                input_price = st.session_state.response.usage.prompt_tokens * input_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">{input_price}$ Input Price</p>', 
+                st.markdown(f'<p class="markdown-custom-1">📤 {st.session_state.response.usage.completion_tokens} output tokens counted by OpenAI API.</p>', 
                             unsafe_allow_html=True)
                 output_price = st.session_state.response.usage.completion_tokens * output_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">{output_price}$ Output Price</p>', 
+                st.markdown(f'<p class="markdown-custom-1">💸 {output_price}$ Output Price</p>', 
                             unsafe_allow_html=True)

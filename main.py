@@ -13,11 +13,11 @@ st.set_page_config(
 
 contents_font_css = """
     <style>
-        /* st.text_input label */
-        div[class*="stTextInput"] label p {
-            font-size: 28px;
+        /* st.text_input, st.number_input label */
+        div[class*="stTextInput"] label p, div[class*="stNumberInput"] label p {
+            font-size: 26px;
         }
-        /* st.selectbox, TextArea label */
+        /* st.selectbox, st.text_area label */
         div[class*="stSelectbox"] label p, div[class*="stTextArea"] label p {
             font-size: 22px;
         }
