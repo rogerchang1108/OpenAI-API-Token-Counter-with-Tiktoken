@@ -22,16 +22,16 @@ def num_tokens_from_messages(col, messages, model='gpt-3.5-turbo-0125'):
         tokens_per_name = 1
     elif 'gpt-4-turbo-preview' in model:
         col.write('Warning: gpt-4-turbo-preview may update over time. Returning num tokens assuming gpt-4-0125-preview.')
-        return num_tokens_from_messages(messages, model='gpt-4-0125-preview')
+        return num_tokens_from_messages(col, messages, model='gpt-4-0125-preview')
     elif 'gpt-4' in model:
         col.write('Warning: gpt-4 may update over time. Returning num tokens assuming gpt-4-0613.')
-        return num_tokens_from_messages(messages, model='gpt-4-0613')
+        return num_tokens_from_messages(col, messages, model='gpt-4-0613')
     elif 'gpt-3.5-turbo-16k' in model:
         col.write('Warning: gpt-3.5-turbo-16k may update over time. Returning num tokens assuming gpt-3.5-turbo-16k-0613')
-        return num_tokens_from_messages(messages, model='gpt-3.5-turbo-16k-0613')
+        return num_tokens_from_messages(col, messages, model='gpt-3.5-turbo-16k-0613')
     elif 'gpt-3.5-turbo' in model:
         col.write('Warning: gpt-3.5-turbo may update over time. Returning num tokens assuming gpt-3.5-turbo-0125')
-        return num_tokens_from_messages(messages, model='gpt-3.5-turbo-0125')
+        return num_tokens_from_messages(col, messages, model='gpt-3.5-turbo-0125')
     else:
         raise NotImplementedError(
             f'''num_tokens_from_messages() is not implemented for model {model}.'''
