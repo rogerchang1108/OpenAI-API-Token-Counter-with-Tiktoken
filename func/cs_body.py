@@ -15,10 +15,10 @@ def cs_body(example_messages):
     colh1, colh2 = st.columns(2)
     
     ## Column header 1: Tiktoken Header
-    colh1.header('Count Input Tokens by Tiktoken 🧮')
+    colh1.subheader('Count Input Tokens by Tiktoken 🧮')
     
     ## Column header 2: OpenAI Header
-    colh2.header('Verify Tokens by OpenAI API 🤖')
+    colh2.subheader('Verify Tokens by OpenAI API 🤖')
     
     # OpenAI API Key Part
     if 'disabled' not in st.session_state:
@@ -50,7 +50,8 @@ def cs_body(example_messages):
     ## Column 1: Tiktoken Part
     with col1:
         with st.form(key='tiktoken_form'):
-            st.subheader('Messages: ')
+            st.markdown(f'<p class="markdown-custom-1">Messages: </p>', 
+                        unsafe_allow_html=True) 
             
             for i, msg in enumerate(example_messages):
                 role = st.selectbox(label = f'Role for Message {i+1}: ', 
@@ -120,7 +121,7 @@ def cs_body(example_messages):
                 st.session_state.disabled = True
         
             for msg in example_messages:
-                st.markdown(f'<p class="markdown-custom-2">{msg['role']} ({msg.get('name', '')}): \n\n<p class="markdown-custom-1">{msg['content']}</p></p>', 
+                st.markdown(f'<p class="markdown-custom-1">{msg['role']} ({msg.get('name', '')}): \n\n<p class="markdown-custom-2">{msg['content']}</p></p>', 
                             unsafe_allow_html=True)
                 
             submit_button2 = st.form_submit_button(
@@ -133,6 +134,8 @@ def cs_body(example_messages):
         
         if st.session_state.response != '':
             with st.container(border=True):
+                st.markdown(f'<p class="markdown-custom-2">OpenAI Output:</p>',
+                            unsafe_allow_html=True)
                 st.markdown(f'<p class="markdown-custom-1">{st.session_state.response.choices[0].message.content}</p>',
                             unsafe_allow_html=True)
             
