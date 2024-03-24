@@ -103,7 +103,8 @@ def cs_body(example_messages):
                 st.markdown(f'<p class="markdown-custom-1">📥 {st.session_state.num_tokens} input tokens counted by Tiktoken</p>', 
                             unsafe_allow_html=True)
                 estimated_input_price = st.session_state.num_tokens * input_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">💳 {estimated_input_price}$ Estimated Input Price</p>', 
+                formatted_estimated_input_price = f"{estimated_input_price:.8f}"
+                st.markdown(f'<p class="markdown-custom-1">💳 {formatted_estimated_input_price}$ Estimated Input Price</p>', 
                         unsafe_allow_html=True)
 
     ## Column 2: OpenAI Part
@@ -142,11 +143,13 @@ def cs_body(example_messages):
                 st.markdown(f'<p class="markdown-custom-1">📥 {st.session_state.response.usage.prompt_tokens} input tokens counted by OpenAI API.</p>', 
                             unsafe_allow_html=True)
                 input_price = st.session_state.response.usage.prompt_tokens * input_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">💸 {input_price}$ Input Price</p>', 
+                formatted_input_price = f"{input_price:.8f}"
+                st.markdown(f'<p class="markdown-custom-1">💸 {formatted_input_price}$ Input Price</p>', 
                             unsafe_allow_html=True)
                 
                 st.markdown(f'<p class="markdown-custom-1">📤 {st.session_state.response.usage.completion_tokens} output tokens counted by OpenAI API.</p>', 
                             unsafe_allow_html=True)
                 output_price = st.session_state.response.usage.completion_tokens * output_price_per_M / 1000000
-                st.markdown(f'<p class="markdown-custom-1">💸 {output_price}$ Output Price</p>', 
+                formatted_output_price = f"{output_price:.8f}"
+                st.markdown(f'<p class="markdown-custom-1">💸 {formatted_output_price}$ Output Price</p>', 
                             unsafe_allow_html=True)
