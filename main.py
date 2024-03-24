@@ -16,27 +16,31 @@ contents_font_css = """
         /* st.text_input, st.number_input label */
         div[class*="stTextInput"] label p, div[class*="stNumberInput"] label p {
             font-size: 26px;
+        }        
+        /* st.text_input, st.number_input value */
+        input, input[type="number"]  {
+            font-size: 20px !important; 
         }
+        
         /* st.selectbox, st.text_area label */
         div[class*="stSelectbox"] label p, div[class*="stTextArea"] label p {
             font-size: 22px;
         }
-        
         /* st.selectbox options */
         div[data-baseweb="select"] div {
-            font-size: 20px !important; 
+            font-size: 18px !important; 
         }
-        /* st.text_input, st.text_area value */
-        input, textarea {
+        /* st.text_area value */
+        textarea {
             font-size: 18px !important;
         }
         
         /* st.markdown */
         .markdown-custom-1 {
-            font-size:24px !important;
+            font-size:22px !important;
         }
         .markdown-custom-2 {
-            font-size:20px !important;
+            font-size:18px !important;
         }
     </style>
 """
