@@ -1,8 +1,10 @@
 import os
 import streamlit as st
 
+from package.use_openai import reply_from_openai
+from package.use_tiktoken import num_tokens_from_messages
+
 def cs_body(example_messages):
-    from package import reply_from_openai, num_tokens_from_messages
     
     if 'num_tokens' not in st.session_state:
         st.session_state.num_tokens = 0

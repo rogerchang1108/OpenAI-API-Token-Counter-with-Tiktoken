@@ -1,7 +1,8 @@
 import os
 import streamlit as st
 
-from package import cs_body, cs_sidebar
+from cs_body import cs_body
+from cs_sidebar import cs_sidebar
 
 st.set_page_config(
     page_title='Streamlit token counter',
