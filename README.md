@@ -19,7 +19,7 @@ Thank you for your interest in the project!
 
 - ### Method 1: Access the web directly (Not available Now)
         
-    - [streamlit](<app_link>)
+    [🌐 OpenAI API Token Counter with Tiktoken](https://token-counter-rogerchang1108.streamlit.app/)
 
 - ### Method 2: Run the application by yourself
 
