@@ -121,7 +121,7 @@ def cs_body(example_messages):
                 st.session_state.disabled = True
         
             for msg in example_messages:
-                st.markdown(f'<p class="markdown-custom-1">{msg['role']} ({msg.get('name', '')}): \n\n<p class="markdown-custom-2">{msg['content']}</p></p>', 
+                st.markdown(f"<p class='markdown-custom-1'>{msg['role']} ({msg.get('name', '')}): \n\n<p class='markdown-custom-2'>{msg['content']}</p></p>", 
                             unsafe_allow_html=True)
                 
             submit_button2 = st.form_submit_button(
