@@ -17,7 +17,7 @@ Thank you for your interest in the project!
 
 ## Usage:
 
-- ### Method 1: Access the web directly (Not available Now)
+- ### Method 1: Access the web directly
         
     [🌐 OpenAI API Token Counter with Tiktoken](https://token-counter-rogerchang1108.streamlit.app/)
 
