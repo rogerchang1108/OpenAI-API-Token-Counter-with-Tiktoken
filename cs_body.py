@@ -111,7 +111,8 @@ def cs_body(example_messages):
     ## Column 2: OpenAI Part
     with col2:
         with st.form(key='openai_form2'):
-            st.subheader('Messages to OpenAI: ')
+            st.markdown(f'<p class="markdown-custom-1">Messages to OpenAI: </p>', 
+                        unsafe_allow_html=True) 
             
             if openai_api_key:
                 st.success('Unlocked!', icon = '🔓')
