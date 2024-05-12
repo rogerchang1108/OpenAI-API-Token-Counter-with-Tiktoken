@@ -20,6 +20,5 @@ def reply_from_openai(col, openai_api_key, model_selected, prompt_messages):
         return response
     
     except Exception as e:
-        col.info('❗Something went wrong! Check your OpenAI API Key!!!')
         col.error(f'An error occurred: {e}')
         return ''

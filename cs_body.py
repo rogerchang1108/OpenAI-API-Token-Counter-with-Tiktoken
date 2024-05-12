@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from openai import OpenAI
 
 from package.use_openai import reply_from_openai
 from package.use_tiktoken import num_tokens_from_messages
@@ -114,9 +115,19 @@ def cs_body(example_messages):
             st.markdown(f'<p class="markdown-custom-1">Messages to OpenAI: </p>', 
                         unsafe_allow_html=True) 
             
+            client = OpenAI(api_key=openai_api_key)
+            
             if openai_api_key:
-                st.success('Unlocked!', icon = '🔓')
-                st.session_state.disabled = False
+                try:
+                    response = client.chat.completions.create(
+                            model="gpt-3.5-turbo",
+                            messages = [{'role':'user','content': "test"}],
+                            max_tokens=1,
+                    )
+                    st.success('Unlocked!', icon = '🔓')
+                    st.session_state.disabled = False
+                except Exception as e:
+                    st.error('Something went wrong! Check your OpenAI API Key!!!', icon = '❗')
             else:
                 st.info('Locked: Please Input Your OpenAI API Key First.', icon = '🔐')
                 st.session_state.disabled = True
