@@ -128,6 +128,7 @@ def cs_body(example_messages):
                     st.session_state.disabled = False
                 except Exception as e:
                     st.error('Something went wrong! Check your OpenAI API Key!!!', icon = '❗')
+                    st.session_state.disabled = True
             else:
                 st.info('Locked: Please Input Your OpenAI API Key First.', icon = '🔐')
                 st.session_state.disabled = True
