@@ -1,8 +1,8 @@
 import os
 import streamlit as st
 
-from cs_body import cs_body
-from cs_sidebar import cs_sidebar
+from package.cs_body import cs_body
+from package.cs_sidebar import cs_sidebar
 
 st.set_page_config(
     page_title='Streamlit token counter',
@@ -67,9 +67,30 @@ example_messages = [
     },
 ]
 
+new_example_messages = [
+    {
+        'role': 'system',
+        'content': 'Task you want openai to do. For example, "Translate the following text into Chinese."',
+    },
+    {
+        'role': 'system',
+        'name': 'example_user',
+        'content': 'User example content. For example, "Hello."',
+    },
+    {
+        'role': 'system',
+        'name': 'example_assistant',
+        'content': 'Assistant example response. For example, "你好。"',
+    },
+    {
+        'role': 'user',
+        'content': 'The content you want openai to process. For example, "How are you?"',
+    },
+]
+
 def main():
     cs_sidebar()
-    cs_body(example_messages)
+    cs_body(new_example_messages)
 
     return None
 

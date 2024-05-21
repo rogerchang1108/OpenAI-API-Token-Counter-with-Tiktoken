@@ -5,8 +5,10 @@ from openai import OpenAI
 from package.use_openai import reply_from_openai
 from package.use_tiktoken import num_tokens_from_messages
 
-def cs_body(example_messages):
+def cs_body(new_example_messages):
     
+    if 'message' not in st.session_state:
+        st.session_state.message = new_example_messages
     if 'num_tokens' not in st.session_state:
         st.session_state.num_tokens = 0
     if 'response' not in st.session_state:
@@ -50,27 +52,51 @@ def cs_body(example_messages):
     
     ## Column 1: Tiktoken Part
     with col1:
+        with st.form(key='message_len_form'):
+            message_len = st.number_input(label = 'Message Length (1 to 11)',
+                                        min_value = 2,
+                                        max_value = 8,
+                                        value = 4,
+                                        step = 2,)
+            
+            submit_button0 = st.form_submit_button(
+                label='Set Length', 
+            )
+        
+        if submit_button0:
+            st.session_state.message = []
+            for i in range(message_len):
+                if i == 0:
+                    st.session_state.message.append({'role': 'system', 'name': '', 'content': ''})
+                elif i == message_len-1:
+                    st.session_state.message.append({'role': 'user', 'name': '', 'content': ''})
+                elif i & 1:
+                    st.session_state.message.append({'role': 'system', 'name': 'example_user', 'content': ''})
+                else:
+                    st.session_state.message.append({'role': 'system', 'name': 'example_assistant', 'content': ''})
+                
+        
         with st.form(key='tiktoken_form'):
             st.markdown(f'<p class="markdown-custom-1">Messages: </p>', 
                         unsafe_allow_html=True) 
             
-            for i, msg in enumerate(example_messages):
+            for i, msg in enumerate(st.session_state.message):
                 role = st.selectbox(label = f'Role for Message {i+1}: ', 
                                     options = ['system', 'user'], 
-                                    index = 0 if msg['role'] == 'system' else 1)
+                                    index = 0 if i+1 < len(st.session_state.message) else 1)
                 
                 if msg.get('name', '') != '' :
                     name = st.selectbox(label = f'Name for Message {i+1} (optional): ', 
-                                        options = ['example_user', 'example_assistant'], 
-                                        index = 0 if msg['name'] == 'example_user' else 1)
+                                        options = ['example_user', 'example_assistant', ''], 
+                                        index = 2 if i == 0 or i == len(st.session_state.message)-1 else (0 if i & 1 else 1))
                     
                 content = st.text_area(label = f'Content for Message {i+1}: ', 
                                     value = msg['content'])
                 
                 if msg.get('name', '') != '' :
-                    example_messages[i] = {'role': role, 'name': name, 'content': content}
+                    st.session_state.message[i] = {'role': role, 'name': name, 'content': content}
                 else:
-                    example_messages[i] = {'role': role, 'content': content}
+                    st.session_state.message[i] = {'role': role, 'content': content}
 
             model_selected = st.selectbox(
                 'Model',
@@ -94,7 +120,7 @@ def cs_body(example_messages):
             )
             
         if submit_button1:
-            st.session_state.num_tokens = num_tokens_from_messages(st, example_messages, model_selected)
+            st.session_state.num_tokens = num_tokens_from_messages(st, st.session_state.message, model_selected)
             st.session_state.response = ''
         
         if st.session_state.num_tokens != 0:
@@ -133,7 +159,7 @@ def cs_body(example_messages):
                 st.info('Locked: Please Input Your OpenAI API Key First.', icon = '🔐')
                 st.session_state.disabled = True
         
-            for msg in example_messages:
+            for msg in st.session_state.message:
                 st.markdown(f"<p class='markdown-custom-1'>{msg['role']} ({msg.get('name', '')}): \n\n<p class='markdown-custom-2'>{msg['content']}</p></p>", 
                             unsafe_allow_html=True)
                 
@@ -143,7 +169,7 @@ def cs_body(example_messages):
             )
                 
         if submit_button2:
-           st.session_state.response = reply_from_openai(st, openai_api_key, model_selected, example_messages)
+           st.session_state.response = reply_from_openai(st, openai_api_key, model_selected, st.session_state.message)
         
         if st.session_state.response != '':
             with st.container(border=True):
