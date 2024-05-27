@@ -53,7 +53,7 @@ def cs_body(new_example_messages):
     ## Column 1: Tiktoken Part
     with col1:
         with st.form(key='message_len_form'):
-            message_len = st.number_input(label = 'Message Length (1 to 11)',
+            message_len = st.number_input(label = 'Message Length (2 to 8)',
                                         min_value = 2,
                                         max_value = 8,
                                         value = 4,
